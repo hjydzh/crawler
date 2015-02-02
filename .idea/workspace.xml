@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logger.conf" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="logger.conf" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/logger.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="741">
-              <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.4399093" vertical-offset="300" max-vertical-offset="741">
+              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -57,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeiBoIphoneCrawler.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="WeiBoIphoneCrawler.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/weibo/WeiBoIphoneCrawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35514018" vertical-offset="38" max-vertical-offset="1862">
+            <state vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="1862">
               <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
@@ -99,8 +99,8 @@
         <option value="$PROJECT_DIR$/dao/DaoService.py" />
         <option value="$PROJECT_DIR$/searchController/SearchCore.py" />
         <option value="$PROJECT_DIR$/log/Log.py" />
-        <option value="$PROJECT_DIR$/logger.conf" />
         <option value="$PROJECT_DIR$/weibo/WeiBoIphoneCrawler.py" />
+        <option value="$PROJECT_DIR$/logger.conf" />
       </list>
     </option>
   </component>
@@ -857,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="741">
-          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/searchController/SearchCore.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4294">
@@ -911,11 +903,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/weibo/WeiBoIphoneCrawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35514018" vertical-offset="38" max-vertical-offset="1862">
+        <state vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="1862">
           <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logger.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4399093" vertical-offset="300" max-vertical-offset="741">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
