@@ -3,6 +3,7 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import logging
+import logging.config
 class WeiBoCrawler:
     logging.config.fileConfig("../logger.conf")
     logging.getLogger("root")
