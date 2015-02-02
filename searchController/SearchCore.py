@@ -1,6 +1,5 @@
 #coding=utf-8
 __author__ = 'junyu'
-from BeautifulSoup import BeautifulSoup
 from dmo.HtmlTag import HtmlTag
 from dao.DaoService import DaoService
 from dmo.Blog import Blog
@@ -10,7 +9,7 @@ import time
 from common.DateUtils import DateUtils
 from oss.oss_api import *
 import logging
-import logging.config
+from log.Log import Log
 import traceback
 class SearchCore:
 
@@ -37,6 +36,7 @@ class SearchCore:
         self.html = RequestCore.request(url, self.crawler.charset)
 
     def search(self):
+        Log.init_log()
         logging.debug('开始抓取')
         self.get_tag_list()
         self.get_html()
@@ -87,7 +87,7 @@ class SearchCore:
 
     #
     def searchContent(self, html):
-        soup = BeautifulSoup(html)
+        soup = ''
         content_soup = self.get_content_soup(soup)
         self.filter_script(content_soup)
         self.filter_words(content_soup)
@@ -200,7 +200,7 @@ class SearchCore:
 
     #搜索符合模版的所有节点
     def search_templates(self):
-         soup = BeautifulSoup(self.html)
+         soup = ''
          root_tag = self.tagList[-1]
          target_templates =  soup.findAll(root_tag.tagName, attrs={root_tag.attr: root_tag.attrValue})    #找到html中所有匹配的dom树
          return target_templates

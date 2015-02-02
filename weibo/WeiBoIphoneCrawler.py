@@ -3,9 +3,9 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import logging
+import os
+from log.Log import Log
 class WeiBoCrawler:
-    logging.config.fileConfig("../logger.conf")
-    logging.getLogger("root")
     #代理地址
     PROXY_HOST = '10.19.110.31'
 
@@ -21,6 +21,8 @@ class WeiBoCrawler:
         self.passwd = passwd
 
     def get_browser(self):
+        print os.path.dirname(__file__)
+        logging.debug('登陆')
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = (
             #"Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"
@@ -37,6 +39,7 @@ class WeiBoCrawler:
 
     #
     def login(self):
+        Log.init_log()
         logging.debug('微博登录开始')
         browser = self.browser
         browser.get(self.PORTAL_URL)
