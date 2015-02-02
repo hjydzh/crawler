@@ -3,9 +3,9 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import logging
-import logging.config
+from log.Log import Log
 class WeiBoCrawler:
-    logging.config.fileConfig("logger.conf")
+    logging.config.fileConfig("../logger.conf")
     logging.getLogger("root")
     #代理地址
     PROXY_HOST = '10.19.110.31'

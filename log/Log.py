@@ -4,8 +4,7 @@ import logging.config
 class Log:
 
     @staticmethod
-    def log():
-        logging.config.fileConfig("logger.conf")
-        a = logging.getLogger("root")
-        return a
+    def init_log():
+        logging.config.fileConfig("../logger.conf")
+        logging.getLogger("root")
 
