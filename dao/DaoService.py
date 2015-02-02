@@ -59,3 +59,8 @@ class DaoService:
     def update_portal_show(self, blog_id):
         dao = DaoBaseService()
         dao.update(SqlConstants.UPDATE_PORTAL_SHOW % blog_id)
+
+    #删除文章
+    def delete_blog(self, blog_id):
+        dao = DaoBaseService()
+        dao.delete(SqlConstants.DELETE_BLOG % blog_id)

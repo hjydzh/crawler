@@ -44,3 +44,5 @@ LIMIT 1
 ) A
 )
     """
+
+    DELETE_BLOG = "DELETE FROM BLOG WHERE BLOG_ID = %s"

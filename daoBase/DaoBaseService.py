@@ -69,3 +69,6 @@ class DaoBaseService:
         finally:
             cursor.close()
             conn.close()
+
+    def delete(self, sql):
+        self.update(sql)

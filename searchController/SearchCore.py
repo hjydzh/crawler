@@ -11,6 +11,7 @@ from common.DateUtils import DateUtils
 from oss.oss_api import *
 import logging
 import logging.config
+import traceback
 class SearchCore:
 
     logging.config.fileConfig("logger.conf")
@@ -32,6 +33,7 @@ class SearchCore:
     #获得目标url的html
     def get_html(self):
         url = self.crawler.url
+        logging.debug("请求url:" + url)
         self.html = RequestCore.request(url, self.crawler.charset)
 
     def search(self):
@@ -54,11 +56,20 @@ class SearchCore:
     def save_blog(self, blog):
         dao = DaoService()
         if not dao.isBlogExistByTitle( blog._Blog__title):
+            logging.debug("博客不存在数据库，开始更新，更新博客题目为:" + blog._Blog__title)
             blog_id = dao.insert_blog(blog)
+            #上传图片
+            try:
+                self.upload_pic()
+            except Exception :
+                logging.error('上传图片出错')
+                logging.error(traceback.format_exc())
+                #删除已经插入的文章
+                dao.delete_blog(blog_id)
+                return
+
             #文章发布到首页
             dao.update_portal_show(blog_id)
-            #上传图片
-            self.upload_pic()
 
 
     #访问a标签，并获取网页正文
@@ -69,7 +80,8 @@ class SearchCore:
         blog._Blog__weight = 0
         blog._Blog__category_id = self.crawler.category_id
         blog._Blog__author = self.crawler.author
-        html = RequestCore.request(RequestCore.getRealUrl(aTag['href'], self.crawler.url), self.crawler.charset)
+        logging.debug("访问文章所在网站，地址为:" +  blog._Blog__url)
+        html = RequestCore.request(blog._Blog__url, self.crawler.charset)
         blog._Blog__content = self.searchContent(html)
         return blog
 
@@ -89,6 +101,15 @@ class SearchCore:
             for script in script_tags:
                 if script != None:
                     script.extract()
+
+    #过滤a标签
+    def filter_a(self, soup):
+        script_tags = soup.findAll("a")
+        if script_tags != None:
+            for script in script_tags:
+                if script != None:
+                    logging.debug("替换a标签为文本:" + script.text)
+                    script.replaceWith(script.text)
 
     #过滤含有关键词的标签
     def filter_words(self, soup):
@@ -193,6 +214,7 @@ class SearchCore:
         for img_url in self.img_list:
             img= RequestCore.img_request(img_url)
             name = self.img_time + str(i) + '.jpeg'
+            logging.debug('开始保存图片，地址为:' + name)
             res = oss.put_object_with_data("weis-pic",  name, img)
             i = i + 1
 
