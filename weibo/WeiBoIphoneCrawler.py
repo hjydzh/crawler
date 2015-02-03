@@ -21,7 +21,7 @@ class WeiBoCrawler:
         self.passwd = passwd
 
     def get_browser(self):
-        print os.path.dirname(__file__)
+        Log.init_log()
         logging.debug('登陆')
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = (

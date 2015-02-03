@@ -6,5 +6,6 @@ class Log:
 
     @staticmethod
     def init_log():
-        logging.config.fileConfig("logger.conf")
+        file_path = os.path.abspath(os.path.dirname(__file__))
+        logging.config.fileConfig(file_path + '\logger.conf')
         logging.getLogger("root")
