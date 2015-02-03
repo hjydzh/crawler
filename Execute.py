@@ -5,7 +5,6 @@ from dao.DaoService import DaoService
 from searchController.SearchCore import SearchCore
 import traceback
 import logging
-import logging.config
 from log.Log import Log
 #检查爬虫是否允许执行
 def check_run_status(crawler):
@@ -21,8 +20,7 @@ def crawler_run(crawler):
     search.search()
 
 
-logging.config.fileConfig("logger.conf")
-logging.getLogger("root")
+Log.init_log()
 dao = DaoService()
 crawlers = dao.queryTCrawlers()
 for crawler in crawlers:
