@@ -1,5 +1,6 @@
 #coding=utf-8
 __author__ = 'junyu'
+from BeautifulSoup import BeautifulSoup
 from dmo.HtmlTag import HtmlTag
 from dao.DaoService import DaoService
 from dmo.Blog import Blog
@@ -86,7 +87,7 @@ class SearchCore:
 
     #
     def searchContent(self, html):
-        soup = ''
+        soup =BeautifulSoup(html)
         content_soup = self.get_content_soup(soup)
         self.filter_script(content_soup)
         self.filter_words(content_soup)
@@ -199,7 +200,7 @@ class SearchCore:
 
     #搜索符合模版的所有节点
     def search_templates(self):
-         soup = ''
+         soup = BeautifulSoup(self.html)
          root_tag = self.tagList[-1]
          target_templates =  soup.findAll(root_tag.tagName, attrs={root_tag.attr: root_tag.attrValue})    #找到html中所有匹配的dom树
          return target_templates
