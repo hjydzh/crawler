@@ -13,8 +13,6 @@ from log.Log import Log
 import traceback
 class SearchCore:
 
-    logging.config.fileConfig("logger.conf")
-    logging.getLogger("root")
 
     def __init__(self, crawler):
         self.tagList = []
@@ -32,7 +30,8 @@ class SearchCore:
     #获得目标url的html
     def get_html(self):
         url = self.crawler.url
-        logging.debug("请求url:" + url)
+        logging.debug("请求url:")
+        logging.debug(url)
         self.html = RequestCore.request(url, self.crawler.charset)
 
     def search(self):

@@ -3,8 +3,8 @@ __author__ = 'junyu'
 import MySQLdb
 
 class DaoBaseService:
-    host_ip = "42.96.201.101"
-    #host_ip = 'localhost'
+    #host_ip = "42.96.201.101"
+    host_ip = 'localhost'
     usr_name = "www"
     #usr_name = "root"
     password = "52logsucc"

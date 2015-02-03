@@ -2,8 +2,6 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from log.Log import Log
-import logging
 
 class WeiBoCrawler:
     #代理地址
@@ -21,8 +19,6 @@ class WeiBoCrawler:
         self.passwd = passwd
 
     def get_browser(self):
-        Log.init_log()
-        logging.debug('登陆')
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = (
             #"Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"
