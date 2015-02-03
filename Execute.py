@@ -3,9 +3,10 @@ from searchController.SearchCore import SearchCore
 from common.DateUtils import DateUtils
 from dao.DaoService import DaoService
 from searchController.SearchCore import SearchCore
+from log.Log import Log
 import traceback
 import logging
-from log.Log import Log
+
 #检查爬虫是否允许执行
 def check_run_status(crawler):
     run_time = crawler.run_time

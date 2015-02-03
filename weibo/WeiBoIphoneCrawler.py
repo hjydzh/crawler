@@ -2,9 +2,9 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import logging
-import os
 from log.Log import Log
+import logging
+
 class WeiBoCrawler:
     #代理地址
     PROXY_HOST = '10.19.110.31'
