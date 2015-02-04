@@ -80,7 +80,8 @@ class SearchCore:
         blog._Blog__weight = 0
         blog._Blog__category_id = self.crawler.category_id
         blog._Blog__author = self.crawler.author
-        logging.debug("访问文章所在网站，地址为:" +  blog._Blog__url)
+        logging.debug("访问文章所在网站，地址为:" )
+        logging.debug(blog._Blog__url)
         html = RequestCore.request(blog._Blog__url, self.crawler.charset)
         blog._Blog__content = self.searchContent(html)
         return blog
