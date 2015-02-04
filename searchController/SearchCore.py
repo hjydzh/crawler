@@ -54,21 +54,24 @@ class SearchCore:
 
     # 保存文章
     def save_blog(self, blog):
+        if None is blog:
+            return
         dao = DaoService()
-        if not dao.isBlogExistByTitle( blog._Blog__title):
-            logging.debug("博客不存在数据库，开始更新，更新博客题目为:")
-            logging.debug(blog._Blog__title)
-            blog_id = dao.insert_blog(blog)
-            #上传图片
-            try:
-                self.upload_pic()
-            except Exception :
-                logging.error('上传图片出错')
-                logging.error(traceback.format_exc())
-                #删除已经插入的文章
-                logging.debug("删除对应文章,文章id为:" + str(blog_id))
-                dao.delete_blog(blog_id)
-                return
+        logging.debug("开始更新，博客题目为:")
+        logging.debug(blog._Blog__title)
+        blog_id = dao.insert_blog(blog)
+        #上传图片
+        try:
+            self.upload_pic()
+        except Exception :
+            logging.error('上传图片出错')
+            logging.error(traceback.format_exc())
+            #删除已经插入的文章
+            logging.debug("删除对应文章,文章id为:" + str(blog_id))
+            logging.debug("题目为:" )
+            logging.debug("题目为:" )
+            dao.delete_blog(blog._Blog__title)
+            return
 
             #文章发布到首页
             dao.update_portal_show(blog_id)
@@ -77,6 +80,14 @@ class SearchCore:
     #访问a标签，并获取网页正文
     def fetchBlog(self, aTag):
         blog = Blog()
+        title = aTag.text
+        logging.debug("文章题目为:")
+        logging.debug(aTag.text)
+        dao = DaoService()
+        if dao.isBlogExistByTitle(title):
+            logging.debug("文章已经存在，不更新")
+            return None
+        logging.debug("文章不存在，准备更新")
         blog._Blog__url = RequestCore.getRealUrl(aTag['href'], self.crawler.url)
         blog._Blog__title = aTag.text
         blog._Blog__weight = 0
@@ -112,7 +123,8 @@ class SearchCore:
         if script_tags != None:
             for script in script_tags:
                 if script != None:
-                    logging.debug("替换a标签为文本:" + script.text)
+                    logging.debug("替换a标签为文本:")
+                    logging.debug(script.text)
                     script.replaceWith(script.text)
 
     #过滤含有关键词的标签
@@ -222,3 +234,9 @@ class SearchCore:
             res = oss.put_object_with_data("weis-pic",  name, img)
             i = i + 1
 
+
+if __name__ == '__main__':
+    dao = DaoService()
+    crawler = dao.query_tcrawler_by_id(36)
+    core = SearchCore(crawler)
+    core.search()

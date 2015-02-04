@@ -64,8 +64,7 @@ class DaoBaseService:
              cursor.execute(sql)
              conn.commit()
         except Exception, msg:
-             print(msg)
-             return
+             raise msg
         finally:
             cursor.close()
             conn.close()

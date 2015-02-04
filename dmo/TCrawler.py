@@ -5,7 +5,7 @@ class TCrawler:
     url = None
     category_id = None
     author = None
-    run_time = None
+    next_run_time = None
     interval = None
     charset = None
     filter_words = None

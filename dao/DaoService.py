@@ -44,16 +44,27 @@ class DaoService:
         else:
             return True
 
-    #查询所有模板爬虫
-    def queryTCrawlers(self):
+    #查询指定目录下一定数量的模板爬虫
+    def query_tcrawlers_category(self, id, blog_num):
         dao = DaoBaseService()
-        obj = dao.query(SqlConstants.QUERY_T_CRAWLERS)
-        return CommonUtils.query_result_to_t_crawler(obj)
+        obj = dao.query(SqlConstants.QUERY_TCRAWLERS_CATEGORY % (id, blog_num))
+        return CommonUtils.query_result_to_t_crawlers(obj)
+
+    #根据爬虫id查询爬虫
+    def query_tcrawler_by_id(self, id):
+        dao = DaoBaseService()
+        obj = dao.query(SqlConstants.QUERY_TCRAWLER_BY_ID % (id))
+        return CommonUtils.query_result_to_t_crawler(obj[0])
 
     #更新模板爬虫的执行时间
-    def update_time_t_crawler(self, crawler_id):
+    def update_time_t_crawler(self, crawler_id, next_run_time):
         dao = DaoBaseService()
-        dao.update(SqlConstants.UPDATE_TIME_T_CRAWLER % crawler_id)
+        dao.update(SqlConstants.UPDATE_TIME_T_CRAWLER % ( next_run_time, crawler_id))
+
+    #更新目录的执行时间
+    def update_time_category(self, category_id, next_run_time):
+        dao = DaoBaseService()
+        dao.update(SqlConstants.UPDATE_TIME_CATEGORY % ( next_run_time, category_id))
 
     #文章发布到首页推荐区
     def update_portal_show(self, blog_id):
@@ -64,3 +75,9 @@ class DaoService:
     def delete_blog(self, blog_id):
         dao = DaoBaseService()
         dao.delete(SqlConstants.DELETE_BLOG % blog_id)
+
+    #查询所有二级目录
+    def query_categories(self):
+        dao = DaoBaseService()
+        obj = dao.query(SqlConstants.QUERY_CATEGORIES_BY_ID % 2)
+        return CommonUtils.query_result_to_categories(obj)

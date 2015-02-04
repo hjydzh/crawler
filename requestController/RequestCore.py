@@ -34,5 +34,11 @@ class RequestCore:
     #获取网站的根路径
     @staticmethod
     def getWebRootPath(url):
-        index = url.find('.com')
+        if url.find('.com') != -1:
+            index = url.find('.com')
+        elif url.find('.net') != -1:
+            index = url.find('.net')
         return url[0:index+4]
+
+if __name__ == '__main__':
+    RequestCore.request('http://www.freebuf.com/news/58513.html', 'utf-8')
