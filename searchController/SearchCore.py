@@ -56,7 +56,8 @@ class SearchCore:
     def save_blog(self, blog):
         dao = DaoService()
         if not dao.isBlogExistByTitle( blog._Blog__title):
-            logging.debug("博客不存在数据库，开始更新，更新博客题目为:" + blog._Blog__title)
+            logging.debug("博客不存在数据库，开始更新，更新博客题目为:")
+            logging.debug(blog._Blog__title)
             blog_id = dao.insert_blog(blog)
             #上传图片
             try:
