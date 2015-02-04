@@ -66,6 +66,7 @@ class SearchCore:
                 logging.error('上传图片出错')
                 logging.error(traceback.format_exc())
                 #删除已经插入的文章
+                logging.debug("删除对应文章,文章id为:" + str(blog_id))
                 dao.delete_blog(blog_id)
                 return
 
@@ -93,6 +94,7 @@ class SearchCore:
         content_soup = self.get_content_soup(soup)
         self.filter_script(content_soup)
         self.filter_words(content_soup)
+        self.filter_a(content_soup)
         self.get_img_url(content_soup)
         return content_soup
 
