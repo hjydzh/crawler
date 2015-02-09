@@ -69,8 +69,8 @@ class SearchCore:
             #删除已经插入的文章
             logging.debug("删除对应文章,文章id为:" + str(blog_id))
             logging.debug("题目为:" )
-            logging.debug("题目为:" )
-            dao.delete_blog(blog._Blog__title)
+            logging.debug(blog._Blog__title )
+            dao.delete_blog(blog_id)
             return
 
             #文章发布到首页
