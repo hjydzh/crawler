@@ -74,7 +74,7 @@ class SearchCore:
             return
 
             #文章发布到首页
-            dao.update_portal_show(blog_id)
+        dao.update_portal_show(blog_id)
 
 
     #访问a标签，并获取网页正文
