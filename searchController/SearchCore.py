@@ -104,6 +104,7 @@ class SearchCore:
         soup =BeautifulSoup(html)
         content_soup = self.get_content_soup(soup)
         self.filter_script(content_soup)
+        self.filter_iframe(content_soup)
         self.filter_words(content_soup)
         self.filter_a(content_soup)
         self.get_img_url(content_soup)
@@ -116,6 +117,14 @@ class SearchCore:
             for script in script_tags:
                 if script != None:
                     script.extract()
+
+    #过滤iframe标签
+    def filter_iframe(self, soup):
+        iframe_tags = soup.findAll("iframe")
+        if iframe_tags != None:
+            for iframe in iframe_tags:
+                if iframe != None:
+                    iframe.extract()
 
     #过滤a标签
     def filter_a(self, soup):
@@ -237,6 +246,6 @@ class SearchCore:
 
 if __name__ == '__main__':
     dao = DaoService()
-    crawler = dao.query_tcrawler_by_id(36)
+    crawler = dao.query_tcrawler_by_id(40)
     core = SearchCore(crawler)
     core.search()
