@@ -26,6 +26,8 @@ class RequestCore:
     #拼装地址
     @staticmethod
     def getRealUrl(url, host):
+        if str(url).find("/") == -1:
+            url = "/" + url
         if str(url).find("http://") == -1:
             url = RequestCore.getWebRootPath(host) + url
             return url
