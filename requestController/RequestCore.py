@@ -40,6 +40,8 @@ class RequestCore:
             index = url.find('.com')
         elif url.find('.net') != -1:
             index = url.find('.net')
+        elif url.find('.me') != -1:
+            index = url.find('.me')
         return url[0:index+4]
 
 if __name__ == '__main__':
