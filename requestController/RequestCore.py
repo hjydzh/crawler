@@ -45,4 +45,5 @@ class RequestCore:
         return url[0:index+4]
 
 if __name__ == '__main__':
+
     RequestCore.request('http://www.freebuf.com/news/58513.html', 'utf-8')
