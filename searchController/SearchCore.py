@@ -62,7 +62,7 @@ class SearchCore:
         blog_id = dao.insert_blog(blog)
         #上传图片
         try:
-            self.upload_pic()
+            self.upload_pic(blog._Blog__title)
         except Exception :
             logging.error('上传图片出错')
             logging.error(traceback.format_exc())
@@ -153,7 +153,7 @@ class SearchCore:
         if None != img_tags:
             for img in img_tags:
                 self.img_list.append(img['src'])
-                img['src'] = 'http://weis-pic.oss-cn-qingdao.aliyuncs.com/'+ self.img_time + str(i) + '.jpeg'
+                img['src'] = 'http://weis-pic.oss-cn-qingdao.aliyuncs.com/' + DateUtils.get_month() + '%2F' + self.img_time + str(i) + '.jpeg'
                 i = i + 1
 
     #删除含有关键字的标签
@@ -218,20 +218,24 @@ class SearchCore:
         if list_tag.attr != '':
             list_tag_attr = list_tag.attr
             list_tag_value = list_tag.attrValue
-            beau_tag_value = beau_tag[list_tag_attr]
-            if beau_tag_value != list_tag_value:
-                return False
+            if None is not list_tag_attr:
+                beau_tag_value = beau_tag[list_tag_attr]
+                if beau_tag_value != list_tag_value:
+                    return False
         return True
 
     #搜索符合模版的所有节点
     def search_templates(self):
          soup = BeautifulSoup(self.html)
          root_tag = self.tagList[-1]
-         target_templates =  soup.findAll(root_tag.tagName, attrs={root_tag.attr: root_tag.attrValue})    #找到html中所有匹配的dom树
+         if '' ==  root_tag.attrValue or None is  root_tag.attrValue:
+             target_templates =  soup.findAll(root_tag.tagName)
+         else:
+            target_templates =  soup.findAll(root_tag.tagName, attrs={root_tag.attr: root_tag.attrValue})    #找到html中所有匹配的dom树
          return target_templates
 
     #上传图片
-    def upload_pic(self):
+    def upload_pic(self, title):
         oss = OssAPI("oss-cn-qingdao.aliyuncs.com", "rtquzVvMIXn2a7mB", "DtXVOoWVoBPisuIAyhdjoFlxbv4AnS")
         i = 0
         if self.img_list is None:
@@ -239,13 +243,14 @@ class SearchCore:
         for img_url in self.img_list:
             img= RequestCore.img_request(img_url)
             name = self.img_time + str(i) + '.jpeg'
-            logging.debug('开始保存图片，地址为:' + name)
-            res = oss.put_object_with_data("weis-pic",  name, img)
+            logging.debug('开始保存图片，图片地址为:')
+            logging.debug(img_url)
+            res = oss.put_object_with_data("weis-pic",   DateUtils.get_month() + '/'+ name, img)
             i = i + 1
 
 
 if __name__ == '__main__':
     dao = DaoService()
-    crawler = dao.query_tcrawler_by_id(40)
+    crawler = dao.query_tcrawler_by_id(12)
     core = SearchCore(crawler)
     core.search()
