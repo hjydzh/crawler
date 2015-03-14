@@ -15,7 +15,7 @@ import traceback
 class SearchCore:
 
 
-    def __init__(self, crawler):
+    def __init__(self, crawler=None):
         self.tagList = []
         self.crawler = crawler
         self.img_list = []
@@ -47,7 +47,7 @@ class SearchCore:
         for template in templates[1:]:
             tag = self.get_tag(template)
             if tag != None:
-                blog = self.fetchBlog(tag)
+                blog = self.fetchBlog(tag.text, tag['href'])
                 self.save_blog(blog)
                 break
 
@@ -78,18 +78,17 @@ class SearchCore:
 
 
     #访问a标签，并获取网页正文
-    def fetchBlog(self, aTag):
+    def fetchBlog(self, title, href):
         blog = Blog()
-        title = aTag.text
         logging.debug("文章题目为:")
-        logging.debug(aTag.text)
+        logging.debug(title)
         dao = DaoService()
         if dao.isBlogExistByTitle(title):
             logging.debug("文章已经存在，不更新")
             return None
         logging.debug("文章不存在，准备更新")
-        blog._Blog__url = RequestCore.getRealUrl(aTag['href'], self.crawler.url)
-        blog._Blog__title = aTag.text
+        blog._Blog__url = RequestCore.getRealUrl(href, self.crawler.url)
+        blog._Blog__title = title
         blog._Blog__weight = 0
         blog._Blog__category_id = self.crawler.category_id
         blog._Blog__author = self.crawler.author
@@ -251,6 +250,6 @@ class SearchCore:
 
 if __name__ == '__main__':
     dao = DaoService()
-    crawler = dao.query_tcrawler_by_id(12)
+    crawler = dao.query_tcrawler_by_id(54)
     core = SearchCore(crawler)
     core.search()

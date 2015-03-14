@@ -6,6 +6,7 @@ from searchController.SearchCore import SearchCore
 from log.Log import Log
 import traceback
 import logging
+from searchController.HotSearchCore import HotSearchCore
 
 class CommonUpdate:
     def __init__(self):
@@ -19,6 +20,10 @@ class CommonUpdate:
             self.update_category(category)
         logging.debug("网站内容更新完成")
 
+    def update_hot_blog(self):
+        search = HotSearchCore()
+        ids = [6, 7]
+        search.hot_search(ids)
 
     #查询所有二级目录
     def get_categories(self):

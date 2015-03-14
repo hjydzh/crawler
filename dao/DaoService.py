@@ -50,6 +50,12 @@ class DaoService:
         obj = dao.query(SqlConstants.QUERY_TCRAWLERS_CATEGORY % (id, blog_num))
         return CommonUtils.query_result_to_t_crawlers(obj)
 
+    #查询指定目录下所有数量的模板爬虫
+    def query_all_tcrawlers_category(self, id):
+        dao = DaoBaseService()
+        obj = dao.query(SqlConstants.QUERY_ALL_TCRAWLERS_CATEGORY % (id))
+        return CommonUtils.query_result_to_t_crawlers(obj)
+
     #根据爬虫id查询爬虫
     def query_tcrawler_by_id(self, id):
         dao = DaoBaseService()
