@@ -42,6 +42,7 @@ class WeiBoCrawler:
     def login(self):
         #Log.init_log()
         #logging.debug('开始登录')
+        print '开始登录'
         browser = self.browser
         browser.get(self.PORTAL_URL)
         time.sleep(4)
