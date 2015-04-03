@@ -22,6 +22,7 @@ class WeiBoCrawler:
     def get_browser(self):
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         #phantomjs_path = "G:\programeSoftwares\python2.7\Scripts\phantomjs.exe"
+        phantomjs_path = "/usr/local/bin/phantomjs"
         dcap["phantomjs.page.settings.userAgent"] = (
             #"Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"
             #"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25"
@@ -31,8 +32,8 @@ class WeiBoCrawler:
             #"Mozilla/5.0 (iPhone; U; ru; CPU iPhone OS 4_2_1 like Mac OS X; ru) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148a Safari/6533.18.5"
             "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/9.8.9.457 U3/0.8.0 Mobile Safari/533.1"
             )
-        #self.browser = webdriver.PhantomJS(desired_capabilities=dcap, executable_path=phantomjs_path)
-        self.browser = webdriver.PhantomJS(desired_capabilities=dcap)
+        self.browser = webdriver.PhantomJS(desired_capabilities=dcap, executable_path=phantomjs_path)
+        #self.browser = webdriver.PhantomJS(desired_capabilities=dcap)
         self.browser.set_window_size(158.1, 77.8)
 
     def get_firfox(self):
