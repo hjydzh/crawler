@@ -12,7 +12,7 @@ class WeiBoCrawler:
 
     PORTAL_URL = 'http://www.52weis.com/'
 
-    HOME_URL = 'http://weibo.com/52weis/home'
+    HOME_URL = 'http://weibo.com/5579712614/home'
 
     def __init__(self, username, passwd):
         self.username = username
@@ -89,7 +89,7 @@ class WeiBoCrawler:
 
 
 if __name__ == '__main__':
-    weibo = WeiBoCrawler('junyuhuangwan@sina.com', 'weibojun@123')
+    weibo = WeiBoCrawler('2823128008@qq.com', '13870093884')
     weibo.get_proxy_browser()
     weibo.login()
     time.sleep(7)
