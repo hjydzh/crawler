@@ -13,7 +13,7 @@ class WeiBoCrawler:
 
     PORTAL_URL = 'http://m.weibo.cn'
 
-    HOME_URL = 'http://weibo.com/52weis/home'
+    HOME_URL = 'http://weibo.com/5579712614/home'
 
     def __init__(self, username, passwd):
         self.username = username
@@ -23,6 +23,7 @@ class WeiBoCrawler:
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         #phantomjs_path = "G:\programeSoftwares\python2.7\Scripts\phantomjs.exe"
         phantomjs_path = "/usr/local/bin/phantomjs"
+
         dcap["phantomjs.page.settings.userAgent"] = (
             #"Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"
             #"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25"
@@ -31,6 +32,7 @@ class WeiBoCrawler:
             #"Mozilla/5.0 (Linux; U; Android 4.2.1; zh-CN; VOTO X2 Build/JOP40D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/9.8.9.457 U3/0.8.0 Mobile Safari/533.1"
             #"Mozilla/5.0 (iPhone; U; ru; CPU iPhone OS 4_2_1 like Mac OS X; ru) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148a Safari/6533.18.5"
             "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/9.8.9.457 U3/0.8.0 Mobile Safari/533.1"
+            #"Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25"
             )
         self.browser = webdriver.PhantomJS(desired_capabilities=dcap, executable_path=phantomjs_path)
         #self.browser = webdriver.PhantomJS(desired_capabilities=dcap)
@@ -81,6 +83,7 @@ class WeiBoCrawler:
         time.sleep(3)
         send_box = self.browser.find_element_by_id('box')
         send = send_box.find_elements_by_tag_name('a')[1]
+        self.browser.get_screenshot_as_file('2.png')
         time.sleep(2)
         send.click()
 
@@ -91,8 +94,8 @@ class WeiBoCrawler:
 
 
 if __name__ == '__main__':
-    weibo = WeiBoCrawler('junyuhuangwan@sina.com', 'weibojun@123')
-    weibo.get_firfox()
+    weibo = WeiBoCrawler('2823128008@qq.com', 'a13870093884')
+    weibo.get_browser()
     weibo.login()
     time.sleep(5)
     list = weibo.get_list()
