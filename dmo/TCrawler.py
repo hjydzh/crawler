@@ -1,4 +1,5 @@
 #coding=utf-8
+
 class TCrawler:
     id = None
     name = None

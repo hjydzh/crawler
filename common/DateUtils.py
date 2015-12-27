@@ -7,7 +7,9 @@ class DateUtils:
 
     STYLE_MYSQL = "%Y-%m-%d %H:%M:%S"
 
-    STYLE_YMD = "%Y%m"
+    STYLE_YM = "%Y%m"
+
+    STYLE_YMD = '%Y-%m-%d'
 
     @staticmethod
     def now():
@@ -22,6 +24,10 @@ class DateUtils:
         return DateUtils.now().strftime("%Y%m%d%H%M%S")
 
     @staticmethod
+    def day_now_str(style):
+        return DateUtils.now().strftime(style)
+
+    @staticmethod
     def date_of_str_format(date, style):
         return date.strftime(style)
 
@@ -32,6 +38,6 @@ class DateUtils:
 
     @staticmethod
     def get_month():
-        return DateUtils.now().strftime(DateUtils.STYLE_YMD)
+        return DateUtils.now().strftime(DateUtils.STYLE_YM)
 if __name__ == '__main__':
-    print DateUtils.get_month()
+    print DateUtils.now_format("%H:%M:%S")

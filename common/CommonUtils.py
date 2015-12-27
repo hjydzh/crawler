@@ -1,6 +1,7 @@
 from dmo.HtmlTag import HtmlTag
 from dmo.TCrawler import TCrawler
 from dmo.Category import Category
+from dmo.ItemInfo import ItemInfo
 class CommonUtils:
 
     @staticmethod
@@ -69,4 +70,26 @@ class CommonUtils:
             category.update_blog_num =  result[4]
             categories.append(category)
         return categories
+
+    @staticmethod
+    def query_result_to_good(result):
+        if None is result:
+            return None
+        info = ItemInfo()
+        info.id =  result[0]
+        info.store_id =  result[1]
+        info.pic_url =  result[2]
+        info.item_name =  result[3]
+        info.sales =  result[4]
+        info.comments =  result[5]
+        info.max_price =  result[6]
+        info.max_price_time =  result[7]
+        info.min_price =  result[8]
+        info.min_price_time = result[9]
+        info.price_square =  result[10]
+        info.sample_num =  result[11]
+        info.average =  result[12]
+        info.stdeva =  result[13]
+        return info
+
 

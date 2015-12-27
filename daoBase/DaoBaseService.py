@@ -5,12 +5,12 @@ import MySQLdb
 class DaoBaseService:
     #host_ip = "42.96.201.101"
     host_ip = 'localhost'
-    usr_name = "www"
-    #usr_name = "root"
-    password = "52logsucc"
-    #password = 'a13870093884'
-    db = "www"
-    #db = 'test'
+    #usr_name = "www"
+    usr_name = "root"
+    #password = "52logsucc"
+    password = '13870093884'
+    #db = "www"
+    db = 'test'
     def insert(self, sql, parms):
         try:
              conn=MySQLdb.connect(host=self.host_ip,user=self.usr_name,passwd=self.password,db=self.db,charset="utf8")

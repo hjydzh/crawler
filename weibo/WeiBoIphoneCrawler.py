@@ -92,7 +92,7 @@ class WeiBoCrawler:
 
 if __name__ == '__main__':
     weibo = WeiBoCrawler('junyuhuangwan@sina.com', 'weibojun@123')
-    weibo.get_browser()
+    weibo.get_firfox()
     weibo.login()
     time.sleep(5)
     list = weibo.get_list()

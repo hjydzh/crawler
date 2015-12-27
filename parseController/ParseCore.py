@@ -1,12 +1,13 @@
 #coding=utf-8
 from BeautifulSoup import BeautifulSoup
+import sys
+reload(sys)
 from dmo.HtmlTag import HtmlTag
 from dao.DaoService import DaoService
 from common.CommonUtils import CommonUtils
 from dmo.TCrawler import TCrawler
 from common.DateUtils import DateUtils
-import sys
-reload(sys)
+
 sys.setdefaultencoding('utf-8')
 class ParsCore:
 
@@ -71,39 +72,7 @@ class ParsCore:
 
 html = """
 
-<div class="entry" style="position: absolute; left: 180px; top: 0px;">
-							<div class="entry-img">
-								<a href="http://www.vcbeat.net/9905.html" target="_blank">
-									<img class="" width="230" height="150" src="http://www.vcbeat.net/wp-content/uploads/2015/02/hipaa.png" alt="全面解读HIPAA三大目的">
-								</a>
-								<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="{'text':'全面解读HIPAA三大目的',
-										'pic':'http://www.vcbeat.net/wp-content/uploads/2015/02/hipaa-209x150.png'}">
-								    <span class="bds_more glyphicon glyphicon-share"></span>
-								</div>
-							</div>
-
-							<div class="entry-detail">
-								<div class="entry-meta-mobile">
-									<a href="http://www.vcbeat.net/category/%e5%8a%a8%e8%84%89%e5%a4%b4%e6%9d%a1">动脉头条</a> /
-									1天前								</div>
-
-								<h3 class="entry-title">
-									<a href="http://www.vcbeat.net/9905.html" target="_blank">全面解读HIPAA三大目的</a>
-								</h3>
-
-								<a class="entry-excerpt" href="http://www.vcbeat.net/9905.html" target="_blank">
-									<p>HIPAA 全称是Health Insurance Portability and Accountability Act/1996，中文翻译应该是健康保险连续和责任法案，1996年由美国国会通过，比尔克林顿总统签署生效。</p>
-								</a>
-
-								<div class="entry-meta-pc">
-									1天前									<a href="http://www.vcbeat.net/9905.html#respond" class="entry-comment" target="_blank">
-										<span class="glyphicon glyphicon-comment"></span>
-									</a>
-								</div>
-							</div>
-						</div>
-
-
+<li><span><a href="http://www.cntv.cn/" target="_blank">中国网络电视台</a>  (03-06 15:09)</span><a href="http://money.hexun.com/2015-03-06/173811172.html" target="_blank">特级月嫂年薪超30万？ 不可不知的月嫂级别评定</a></li>
 
 """
 
@@ -112,19 +81,19 @@ html = """
 dao = DaoService()
 tag_name = 'div'
 tag_attr = 'id'
-tag_attr_value = 'post-content'
+tag_attr_value = 'artibody'
 tag_parm = (tag_name, tag_attr, tag_attr_value, None, None)
 blog_tag_id = dao.insert_html_tag(tag_parm)
 print blog_tag_id
 
 crawler = TCrawler()
-crawler.name = 'dongmai_common'
-crawler.url = 'http://www.vcbeat.net/'
-crawler.category_id = 9
-crawler.author = '动脉网'
+crawler.name = 'hexun_finance_common'
+crawler.url = 'http://money.hexun.com/jrdd/index.html'
+crawler.category_id = 17
+crawler.author = '和讯网'
 crawler.interval = 2
 crawler.blog_tag_id = blog_tag_id
-p = ParsCore(html, '全面解读HIPAA三大目的', crawler)
+p = ParsCore(html, '特级月嫂年薪超30万？ 不可不知的月嫂级别评定', crawler)
 p.parseA()
 
 

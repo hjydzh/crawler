@@ -10,9 +10,9 @@ class WeiBoCrawler:
     #代理端口
     PROXY_PORT = 8080
 
-    PORTAL_URL = 'http://www.52weis.com/'
-
     HOME_URL = 'http://weibo.com/5579712614/home'
+
+
 
     def __init__(self, username, passwd):
         self.username = username
@@ -28,6 +28,12 @@ class WeiBoCrawler:
         fp.update_preferences()
         self.browser =  webdriver.Firefox(firefox_profile=fp)
 
+    def get_chrome(self):
+        chromedriver = 'G:/lessUsedTools/browser/chrome/chromedriver.exe'
+
+        #browser = webdriver.FirefoxProfile(firefox_binary=binary)
+        self.browser = webdriver.Chrome(chromedriver)
+
     def get_browser(self):
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = (
@@ -41,26 +47,26 @@ class WeiBoCrawler:
 
     #
     def login(self):
-        browser = self.browser
-        browser.get(self.PORTAL_URL)
-        time.sleep(7)
+        print '开始登录'
+        PORTAL_URL = 'http://m.weibo.cn'
+        self.browser.get(PORTAL_URL)
+        login_button_box = self.browser.find_element_by_class_name('action')
+        login_button = login_button_box.find_elements_by_tag_name('a')[1]
+        login_button.click()
+        time.sleep(5)
         self.input_login_info()
 
     #登陆
     def input_login_info(self):
-        tags = self.browser.find_elements_by_class_name("info_list")
-        print self.browser.page_source
-        #获得用户名输入框
-        name_tag = tags[0].find_element_by_tag_name('input')
-        name_tag.clear()
-        #获得密码输入框
-        password_tag = tags[1].find_element_by_tag_name('input')
-        name_tag.send_keys(self.username)
-        password_tag.send_keys(self.passwd)
-        submit_box = self.browser.find_elements_by_class_name('W_btn_g')[1]
+        username_driver = self.browser.find_element_by_id('loginName')
+        username_driver.send_keys(self.username)
+        passwd_driver = self.browser.find_element_by_id('loginPassword')
+        passwd_driver.send_keys(self.passwd)
+        submit_box = self.browser.find_element_by_id('loginAction')
         submit_box.click()
-        time.sleep(4)
+        time.sleep(5)
         self.browser.get(self.HOME_URL)
+        time.sleep(5)
 
 
     #获得weibo列表
@@ -89,8 +95,8 @@ class WeiBoCrawler:
 
 
 if __name__ == '__main__':
-    weibo = WeiBoCrawler('2823128008@qq.com', '13870093884')
-    weibo.get_proxy_browser()
+    weibo = WeiBoCrawler('2823128008@qq.com', 'a13870093884')
+    weibo.get_browser()
     weibo.login()
     time.sleep(7)
     list = weibo.get_list()
