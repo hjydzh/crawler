@@ -5,7 +5,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 class WeiBoCrawler:
 
     #代理地址
-    PROXY_HOST = '10.19.110.31'
+    PROXY_HOST = ''
 
     #代理端口
     PROXY_PORT = 8080
@@ -95,7 +95,7 @@ class WeiBoCrawler:
 
 
 if __name__ == '__main__':
-    weibo = WeiBoCrawler('2823128008@qq.com', 'a13870093884')
+    weibo = WeiBoCrawler('@qq.com', '')
     weibo.get_browser()
     weibo.login()
     time.sleep(7)
