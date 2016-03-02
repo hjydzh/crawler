@@ -47,9 +47,9 @@ class WeiboCommon:
     #登陆
     def input_login_info(self, browser):
         username = browser.find_element_by_id('loginName')
-        username.send_keys('junyuhuangwan@sina.com')
+        username.send_keys(' ')
         passwd = browser.find_element_by_id('loginPassword')
-        passwd.send_keys('weibojun@123')
+        passwd.send_keys(' ')
         submit_box = browser.find_element_by_id('loginAction')
         submit_box.click()
         time.sleep(5)
