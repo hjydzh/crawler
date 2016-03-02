@@ -3,14 +3,14 @@ __author__ = 'junyu'
 import MySQLdb
 
 class DaoBaseService:
-    #host_ip = "42.96.201.101"
+    #host_ip = ""
     host_ip = 'localhost'
-    #usr_name = "www"
-    usr_name = "root"
-    #password = "52logsucc"
-    password = '13870093884'
-    #db = "www"
-    db = 'test'
+    #usr_name = ""
+    usr_name = ""
+    #password = ""
+    password = ''
+    #db = ""
+    db = ''
     def insert(self, sql, parms):
         try:
              conn=MySQLdb.connect(host=self.host_ip,user=self.usr_name,passwd=self.password,db=self.db,charset="utf8")
